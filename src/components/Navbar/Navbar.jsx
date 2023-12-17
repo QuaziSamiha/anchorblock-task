@@ -19,17 +19,17 @@ const Navbar = () => {
     {
       id: 3,
       name: "Projects",
-      // path: '/projects'
+      path: '/projects'
     },
     {
       id: 4,
       name: "Tasks",
-      // path: '/tasks'
+      path: 'tasks'
     },
     {
       id: 5,
       name: "Reporting",
-      // path: '/reporting'
+      path: '/reporting'
     },
   ];
   return (
@@ -50,11 +50,11 @@ const Navbar = () => {
                 >
                   <NavLink
                     to={route.path}
-                    className="text-[#F4EBFF] text-base leading-6 font-medium align-text-middle"
+                    className="text-[#F4EBFF] text-base leading-6 font-medium"
                   >
-                    <span className="mt-4 p-3 align-text-middle">
+                    <p className="pt-2 h-10 rounded-md align-middle">
                       {route.name}
-                    </span>
+                    </p>
                   </NavLink>
                 </div>
               ))}

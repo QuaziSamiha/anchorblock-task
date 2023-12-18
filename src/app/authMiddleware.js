@@ -7,13 +7,17 @@ import {
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
 const auth = getAuth(app);
-export const signUp = (email, password) => (dispatch) => {
-  dispatch(setLoading(true));
 
+export const signUp = (email, password, location, navigate) => (dispatch) => {
+  
+  dispatch(setLoading(true));
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      dispatch(setUser(userCredential.user));
+      console.log(email);
+      console.log(userCredential);
+      dispatch(setUser(email));
       dispatch(clearError());
+      navigate(location.state?.from.pathname, { replace: true });
       console.log("Sign-up successful!");
     })
     .catch((error) => {

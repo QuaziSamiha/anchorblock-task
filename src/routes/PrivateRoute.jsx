@@ -1,9 +1,18 @@
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 
-const PrivateRoute = () => {
+// eslint-disable-next-line react/prop-types
+const PrivateRoute = ({ children }) => {
   const location = useLocation();
-//   const isAuthenticated = useSelector((state) => state.auth.user !== null);
+  console.log(location);
+  const { user, loading } = useSelector((state) => state.auth);
+  console.log("user in private route: ", user);
+  if(loading) {
+    return 'loading....'
+  }
+  if (user) {
+    return children;
+  }
   return <Navigate state={{ from: location }} to="/signup" replace></Navigate>;
 };
 

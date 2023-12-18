@@ -23,11 +23,11 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "signup",
+    path: "https://anchorblock-task-murex.vercel.app/signup",
     element: <SignUp />,
   },
   {
-    path: "signin",
+    path: "https://anchorblock-task-murex.vercel.app/signin",
     element: <SignIn />,
   },
 ]);

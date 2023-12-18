@@ -1,9 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { GiStack } from "react-icons/gi";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
 import { signIn } from "../../app/authMiddleware";
 
 const SignIn = () => {
@@ -14,19 +13,15 @@ const SignIn = () => {
   } = useForm();
 
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((state) => state.auth);
+  const { loading } = useSelector((state) => state.auth);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
+  const location = useLocation();
+  const navigation = useNavigate();
   const onSubmit = (data) => {
     // console.log(data);
-    setEmail(data.email);
-    setPassword(data.password);
-    dispatch(signIn(data.email, data.password));
+    dispatch(signIn(data.email, data.password, location, navigation));
   };
 
-  // console.log(email, password);
   return (
     <>
       <section className="flex justify-center items-center my-12">

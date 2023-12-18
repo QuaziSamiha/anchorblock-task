@@ -9,16 +9,16 @@ import app from "../firebase/firebase.config";
 const auth = getAuth(app);
 
 export const signUp = (email, password, location, navigate) => (dispatch) => {
-  
   dispatch(setLoading(true));
   createUserWithEmailAndPassword(auth, email, password)
+    // eslint-disable-next-line no-unused-vars
     .then((userCredential) => {
-      console.log(email);
-      console.log(userCredential);
+      // console.log(email);
+      // console.log(userCredential);
       dispatch(setUser(email));
       dispatch(clearError());
       navigate(location.state?.from.pathname, { replace: true });
-      console.log("Sign-up successful!");
+      // console.log("Sign-up successful!");
     })
     .catch((error) => {
       dispatch(setError(error.message));
@@ -29,13 +29,17 @@ export const signUp = (email, password, location, navigate) => (dispatch) => {
     });
 };
 
-export const signIn = (email, password) => (dispatch) => {
+export const signIn = (email, password, location, navigate) => (dispatch) => {
   dispatch(setLoading(true));
 
   signInWithEmailAndPassword(auth, email, password)
+    // eslint-disable-next-line no-unused-vars
     .then((userCredential) => {
-      dispatch(setUser(userCredential.user));
+      console.log(email);
+      console.log(userCredential);
+      dispatch(setUser(email));
       dispatch(clearError());
+      navigate(location.state?.from.pathname, { replace: true });
       console.log("Sign-in successful!");
     })
     .catch((error) => {

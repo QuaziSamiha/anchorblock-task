@@ -12,7 +12,6 @@ const SignUp = () => {
   } = useForm();
 
   const dispatch = useDispatch();
-  // eslint-disable-next-line no-unused-vars
   const { loading } = useSelector((state) => state.auth);
 
   const location = useLocation();

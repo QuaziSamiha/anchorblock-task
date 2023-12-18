@@ -7,13 +7,13 @@ const PrivateRoute = ({ children }) => {
   console.log(location);
   const { user, loading } = useSelector((state) => state.auth);
   console.log("user in private route: ", user);
-  if(loading) {
-    return 'loading....'
+  if (loading) {
+    return "loading....";
   }
   if (user) {
     return children;
   }
-  return <Navigate state={{ from: location }} to="/signup" replace></Navigate>;
+  return <Navigate state={{ from: location }} to="/signin" replace></Navigate>;
 };
 
 export default PrivateRoute;

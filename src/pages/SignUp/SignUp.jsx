@@ -1,25 +1,39 @@
 import { GiStack } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { signUp } from "../../app/authMiddleware";
 
 const SignUp = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const dispatch = useDispatch();
+  // eslint-disable-next-line no-unused-vars
+  const { loading, error } = useSelector((state) => state.auth);
 
-  console.log(watch("example"));
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onSubmit = (data) => {
+    // console.log(data);
+    setEmail(data.email);
+    setPassword(data.password);
+    dispatch(signUp(data.email, data.password))
+  };
+
+  console.log(email, password);
   return (
     <>
       <section className="flex justify-center items-center my-12">
         <div className="w-[444px] h-[576px] flex justify-start shadow-2xl rounded-lg border border-[#f0f0f0] shadow-[#f0f0f1]">
           <div className="mx-12 my-14 w-full">
             <div className="flex items-center h-[46px] w-[159px]">
-              <GiStack className="w-[51px] h-6 text-[#6941C6] mr-3" />
+              <GiStack className="w-[51px] h-6 text-[#6941C6]" />
               <h1 className="text-[28px] font-bold text-[#4E5D78]">Stack</h1>
             </div>
             <p className="text-xl text-[#404040] font-semibold mt-4 mb-6">
@@ -45,11 +59,7 @@ const SignUp = () => {
                     type="email"
                     id="email"
                     {...register("email", {
-                      required: "Email is required",
-                      pattern: {
-                        value: /^\S+@\S+$/i,
-                        message: "Invalid email address",
-                      },
+                      required: true,
                     })}
                   />
                   {errors.email && (
@@ -58,7 +68,7 @@ const SignUp = () => {
                     </p>
                   )}
                 </div>
-                
+
                 <div className="h-[96px]">
                   <label
                     htmlFor="password"
@@ -76,13 +86,7 @@ const SignUp = () => {
                     }`}
                     type="password"
                     id="password"
-                    {...register("password", {
-                      required: "Password is required",
-                      minLength: {
-                        value: 6,
-                        message: "Password must be at least 6 characters",
-                      },
-                    })}
+                    {...register("password", { required: true })}
                   />
                   {errors.password && (
                     <p className="h-5 my-2 text-sm text-[#F04438]">
@@ -103,12 +107,15 @@ const SignUp = () => {
                   className="mt-2 cursor-pointer  bg-[#6941c6] text-white w-[320px] h-[44px] text-center align-middle rounded-md"
                   type="submit"
                   value="Sign Up"
+                  disabled={loading}
                 />
               </form>
             </div>
             <p className="text-base font-medium text-[#B0B7C3] my-6">
               Already have an account?{" "}
-              <Link className="text-[#377DFF]" to='/signin'>Sign In</Link>
+              <Link className="text-[#377DFF]" to="/signin">
+                Sign In
+              </Link>
             </p>
           </div>
         </div>

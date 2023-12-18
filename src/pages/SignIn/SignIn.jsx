@@ -1,18 +1,32 @@
+/* eslint-disable no-unused-vars */
 import { GiStack } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { signIn } from "../../app/authMiddleware";
 
 const SignIn = () => {
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: { errors },
-      } = useForm();
-    
-      const onSubmit = (data) => console.log(data);
-    
-      console.log(watch("example"));
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.auth);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onSubmit = (data) => {
+    // console.log(data);
+    setEmail(data.email);
+    setPassword(data.password);
+    dispatch(signIn(data.email, data.password));
+  };
+
+  // console.log(email, password);
   return (
     <>
       <section className="flex justify-center items-center my-12">
@@ -45,11 +59,7 @@ const SignIn = () => {
                     type="email"
                     id="email"
                     {...register("email", {
-                      required: "Email is required",
-                      pattern: {
-                        value: /^\S+@\S+$/i,
-                        message: "Invalid email address",
-                      },
+                      required: true,
                     })}
                   />
                   {errors.email && (
@@ -77,11 +87,7 @@ const SignIn = () => {
                     type="password"
                     id="password"
                     {...register("password", {
-                      required: "Password is required",
-                      minLength: {
-                        value: 6,
-                        message: "Password must be at least 6 characters",
-                      },
+                      required: true,
                     })}
                   />
                   {errors.password && (
@@ -102,13 +108,14 @@ const SignIn = () => {
                 <input
                   className="mt-2 cursor-pointer  bg-[#6941c6] text-white w-[320px] h-[44px] text-center align-middle rounded-md"
                   type="submit"
-                  value="Sign Up"
+                  value="Sign In"
+                  disabled={loading}
                 />
               </form>
             </div>
             <p className="text-base font-medium text-[#B0B7C3] my-6">
-            Don&apos;t have an account?
-              <Link className="text-[#377DFF]" to="/signup">
+              Don&apos;t have an account?
+              <Link className="text-[#377DFF] ml-2" to="/signup">
                 Sign Up
               </Link>
             </p>

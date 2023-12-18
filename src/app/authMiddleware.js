@@ -1,4 +1,4 @@
-import { clearError, setError, setLoading, setUser } from "../auth/authSlice";
+import { clearError, setError, setLoading, setUser } from "../features/auth/authSlice";
 import {
   createUserWithEmailAndPassword,
   getAuth,

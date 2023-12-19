@@ -20,9 +20,9 @@ const Users = () => {
               </div>
             </div>
           </header>
-          <div className="h-[612px]">
+          <section className="">
             <UsersTable />
-          </div>
+          </section>
         </div>
       </section>
     </>

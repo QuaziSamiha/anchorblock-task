@@ -32,13 +32,13 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "https://anchorblock-task-murex.vercel.app/signup",
-    // path: "/signup",
+    // path: "https://anchorblock-task-murex.vercel.app/signup",
+    path: "/signup",
     element: <SignUp />,
   },
   {
-    path: "https://anchorblock-task-murex.vercel.app/signin",
-    // path: "/signin",
+    // path: "https://anchorblock-task-murex.vercel.app/signin",
+    path: "/signin",
     element: <SignIn />,
   },
 ]);

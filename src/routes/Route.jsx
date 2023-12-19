@@ -5,6 +5,7 @@ import Users from "../pages/Users/Users/Users";
 import SignUp from "../pages/SignUp/SignUp";
 import SignIn from "../pages/SignIn/SignIn";
 import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../pages/DashBoard/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -20,16 +21,24 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: "dashboard",
+        element: (
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   {
-    // path: "https://anchorblock-task-murex.vercel.app/signup",
-    path: "signup",
+    path: "https://anchorblock-task-murex.vercel.app/signup",
+    // path: "signup",
     element: <SignUp />,
   },
   {
-    // path: "https://anchorblock-task-murex.vercel.app/signin",
-    path: "signin",
+    path: "https://anchorblock-task-murex.vercel.app/signin",
+    // path: "signin",
     element: <SignIn />,
   },
 ]);
